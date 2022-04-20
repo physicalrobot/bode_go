@@ -9,28 +9,35 @@ import PlacesAutocomplete, {
 // import React from "react";
 import {
   GoogleMap, 
+  useJsApiLoader ,
   useLoadScript,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
 import { formatRelative  } from "date-fns"
+
+const libraries = ["places"];
+const mapContainerSytle = {
+  width: "100vw",
+  height: "100vh",
+}
+
+const center = {
+  lat: 40.7282,
+  lng: -73.7949}
+
+
 function App() {
-
-  const libraries = ["places"];
-  const mapContainerSytle = {
-    width: "100vw",
-    height: "100vh"
-
-  }
-  const center = {
-    lat: 40.7282,
-    lng: 73.7949}
 
   const {isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries, 
 
   });
+ 
+
+
+
 
   if (loadError) return "Error loading maps"
   if (!isLoaded) return "Loading Maps" 
@@ -48,7 +55,11 @@ function App() {
 
   return (
   <div>
-    <GoogleMap mapContainerStyle={mapContainerSytle} zoom = {8} center={center}></GoogleMap>
+    <GoogleMap 
+    mapContainerStyle={mapContainerSytle} 
+    zoom = {8} 
+    center={center}
+    ></GoogleMap>
 
   </div>
   )
